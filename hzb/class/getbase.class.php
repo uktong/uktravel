@@ -24,14 +24,14 @@ class base{
     }
     function getJur($datatype,$data,$search="id"){
         $dataarray=json_decode(file_get_contents($this->R.$this->Jurroot.$datatype.'.json'), true);
-        
         foreach ($dataarray as $a){
+            if(is_array(@$a["son"])){
             foreach ($a["son"] as $s){
                 if(md5($s[$data])==$search){
                     return $s;
                 }
             }
-            
+            }
         }
     }
 }

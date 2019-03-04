@@ -114,17 +114,34 @@ $(function(){
 			$("#themeList").theme({themeBase:"themes"}); // themeBase 相对于index页面的主题base路径
 		}
 	});
+
+
+
 });
 
+function selecttemp(obj){
+	$.post("vchat/selecttempmsg.php",{tempid:obj.val()},function(result){
+	    $("#addmsgbox").html(result);
+	  });
+}
 </script>
+<style type="text/css">
+.tfoot{
+	height:30px;
+}
+.tfoot th{
+	border:1px solid #cccccc;
+	font-weight:900;
+	text-align:center;
+}
 
+</style>
 </head>
 <body>
 	<div id="layout">
 		<div id="header">
 			<div class="headerNav">
-				<a class="logo" href="#"></a>
-				
+				<img src="themes/default/images/logo.png" alt="logo"  style="height:50px;" />
 				<ul class="nav">
 			<li><a href="javascript:void(0);">用户：<?php echo $_COOKIE["username"];?></a></li>
 <!-- 					<li><a href="changepwd.html" target="dialog" rel="changepwd" width="600">设置</a></li> -->

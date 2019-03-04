@@ -47,6 +47,7 @@ class  DB{
    public   function select($table,$data,$where){
         $sql="select   ".$data." from ".$table." where ".$where;
         $resorse=mysqli_query($this->con,$sql);
+//         echo $sql;
         $selectdata=mysqli_fetch_all($resorse,MYSQLI_ASSOC);
         return $selectdata;
     }
@@ -61,11 +62,11 @@ class  DB{
         if(count($resultarraycount)>0){
         $resultnum=$resultarraycount[0]["num"];
         $sr=($pageNum-1)*$numPerPage;
-        
-        $resultnowarray=$this->select($table, $data,  $where.$orderby." limit ".$sr.",".$numPerPage );
+        $result=$this->select($table, $data,  $where.$orderby);
+        $resultnowarray=array_slice($result, $sr,$numPerPage);
         $dataq["amount"]=$resultnum;
         if($countall){
-            $resultnowarray=$this->select($table, $data,  $where );
+            $resultnowarray=$result;
         }
         $dataq["result"]=$resultnowarray;
         

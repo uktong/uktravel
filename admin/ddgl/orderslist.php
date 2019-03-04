@@ -13,7 +13,8 @@ if(isset($_POST["numPerPage"])){
     $numPerPage=$_POST["numPerPage"];
     $pageNum=$_POST["pageNum"];
 }
-
+$orderstate=$db->select("uk_base", "*", "type='orderstate' order by sort");
+$travelstate=$db->select("uk_base", "*", "type='travelstate' order by sort");
 ?>
 
 
@@ -49,7 +50,11 @@ if(isset($_POST["numPerPage"])){
 
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="jtgl/add.php<?php echo "?J=".$_GET["J"];?>" target="navTab" rel="add"><span>添加</span></a></li>
+			<li><a class="add" href="ddgl/addneworder.php<?php echo "?J=".$_GET["J"];?>" mask="true" target="dialog" width="760" height="380" rel="addneworder"><span>发布信息</span></a></li>
+			<li><a class="edit" href="ddgl/editorder.php?orderid={orderlist}&<?php echo "J=".$_GET["J"];?>" target="dialog" mask="true"  width="760" height="380"><span>修改</span></a></li>
+			<li><a class="icon" href="ddgl/payorder.php?orderid={orderlist}&<?php echo "J=".$_GET["J"];?>" target="dialog" mask="true"  width="980" height="480" rel="payorder"><span>支付佣金</span></a></li>
+			<li><a class="delete" href="action/delete.php?action=ddlb&orderid={orderlist}&<?php echo "J=".$_GET["J"];?>" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+			
 		</ul>
 	</div>
 	 <?php 
@@ -66,13 +71,13 @@ if(isset($_POST["numPerPage"])){
 			     $sql.=" and a.cratetime between '".$firstday."  00:00:00' and '".$lastday."  23:59:59'";
 			  
 			 }
-			     $result=$db->tabledata($pageNum,$numPerPage,"uk_orders as a left join uk_user as b on a.user=b.openid","*","1=1 ".$sql." order by a.cratetime desc","a.onlycode");
+			     $result=$db->tabledata($pageNum,$numPerPage,"uk_orders as a left join uk_user as b on a.user=b.openid","a.*,b.realname,b.hotel,b.state as userstate","1=1 ".$sql." order by a.cratetime desc","a.onlycode");
 			     $resultnum=$result["amount"];
 			     $resultnowarray=$result["result"];
 			     ?>
 
 
-	<table class="table" width="100%" layoutH="128" style="word-break:break-all; word-wrap:break-all;">
+	<table class="table" width="100%" layoutH="138" style="word-break:break-all; word-wrap:break-all;">
 		<thead>
 			<tr>
 				<th align="center">序号</th>
@@ -88,15 +93,25 @@ if(isset($_POST["numPerPage"])){
 				<th align="center">需求状态</th>
 				<th align="center">行程状态</th>
 				<th align="center">发布时间</th>
-				<th align="center">操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			 <?php 
 			 for ($a=0;$a<count($resultnowarray);$a++){
 			     $line=$resultnowarray[$a];
+			     
+			     foreach ($orderstate as $os){
+			         if ($os["value"]==$line["state"]){
+			             $ostate="<a style='color:".$os["color"].";'>".$os["name"]."</a>";
+			         }
+			     }
+			     foreach ($travelstate as $ts){
+			         if ($ts["value"]==$line["travelstate"]){
+			             $tstate="<a style='color:".$ts["color"].";'>".$ts["name"]."</a>";
+			         }
+			     }
 			     ?>
-			     <tr>
+			     <tr target="orderlist" rel="<?php echo $line["orderid"];?>">
 			     <td><?php echo $a+1;?></td>
 			     <td><?php echo $line["orderid"];?></td>
 			     <td><?php echo $line["hotel"];?></td>
@@ -107,10 +122,10 @@ if(isset($_POST["numPerPage"])){
 			     <td><?php echo $line["chdamount"];?></td>
 			     <td><?php echo $line["travelroad"];?></td>
 			     <td><?php echo $line["starttime"];?></td>
-			     <td><?php echo $line["state"];?></td>
-			     <td><?php echo $line["travelstate"];?></td>
+			     <td><?php echo $ostate;?></td>
+			     <td><?php echo $tstate;?></td>
 			     <td><?php echo $line["cratetime"];?></td>
-			     <td></td>
+
 			     </tr>
 			     
 			     

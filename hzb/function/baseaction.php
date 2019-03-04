@@ -112,3 +112,14 @@ function array_diff_assoc2_deep($array1, $array2) {
     }
     return array_filter($ret);
 } 
+
+function statebetext($state){
+    switch ($state){
+        case "1":
+            return "<a style='color:green'>开启</a>";
+            break;
+        case "2":
+            return "<a style='color:red'>关闭</a>";
+            break;
+    }
+}

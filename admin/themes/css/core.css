@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 
 /* Core Code */
 html, body, div, span, applet, object, iframe,
@@ -17,6 +17,7 @@ ul, ol { list-style:none;}
 
 /* Tables still need 'cellspacing="0"' in the markup. */
 table { border-collapse:separate; border-spacing:0;}
+
 caption, th, td { font-weight:normal;}
 
 /* Remove possible quote marks (") from <q>, <blockquote>. */
@@ -283,7 +284,7 @@ a:hover {text-decoration:underline;}
 .pagination li.disabled .last { margin-right:5px;}
 
 .pagination li.jumpto { padding:2px 2px 0 7px; background-position:0 -200px;}
-.pagination li.jumpto .textInput { float:left; width:30px; padding:1px; border-color:#acaeaf;}
+.pagination li.jumpto .textInput { float:left; width:50px; padding:1px; border-color:#acaeaf;}
 .pagination li.jumpto .goto { float:left; display:block; overflow:hidden; width:16px; height:19px; border:0; text-indent:-1000px; background-position:0 -650px; cursor:pointer;}
 
 .grid { display:block; overflow:hidden; width:100%; border-width:0 1px; position:relative;}
@@ -296,13 +297,16 @@ a:hover {text-decoration:underline;}
 .grid table { border:0; border-collapse:collapse;table-layout:fixed;}
 .grid .gridHeader th { padding:0 3px; border-style:solid; border-width:0 1px 1px 0; vertical-align:top; white-space:nowrap; line-height:21px; cursor:default;}
 .grid .gridHeader th.hover, .grid .gridHeader th.thSelected { background-position:0 -50px;}
-.grid .gridTbody td { border-right:solid 1px #ededed; overflow:hidden; padding:0 3px; border-bottom:solid 1px #ededed; vertical-align:middle; line-height:21px;}
-.grid .gridTbody td div { display:block; overflow:hidden; height:21px; white-space:nowrap; line-height:21px;}
+.grid .gridTbody td { border-right:solid 1px #ededed;  padding:0 3px; border-bottom:solid 1px #ededed; vertical-align:middle; line-height:21px;}
+.grid .gridTbody  tr:nth-child(even){
+background-color: rgb(237, 245, 254);
+}
+.grid .gridTbody td div { display:block;   white-space:normal; line-height:21px;}
 .grid .gridTbody td div a{line-height:21px;}
 
 .grid .gridRow { border-style:solid; border-width:0 0 1px 0; cursor:default;}
 .grid .gridRow td.tdLast { padding:0 4px 0 5px; border-right:solid 1px;}
-.grid .gridCol { width:100%; display:block; overflow:hidden; height:21px; line-height:21px; white-space:nowrap;}
+.grid .gridCol { width:100%; display:block; overflow:hidden; line-height:21px; white-space:nowrap;}
 
 
 .grid .gridTbody .selected td { border-bottom-style:dotted; border-bottom-width:1px;}
@@ -492,7 +496,7 @@ body { overflow:hidden;}
 .searchBar .subBar li { float:left; margin-left:5px;}
 .pageContent { display:block;overflow:auto;position:relative;}
 
-.dateRange input{width:72px;}
+.dateRange input{width:80px;}
 .dateRange .limit {text-align: center; width: 15px; line-height:21px; }
 
 /* Pages Form */
@@ -504,7 +508,7 @@ body { overflow:hidden;}
 .pageFormContent .radioGroup { float:left; display:block; overflow:hidden;}
 .pageFormContent label { float:left; width:120px; padding:0 5px; line-height:21px;}
 .pageFormContent label.radioButton { float:left; width:auto; padding:0 10px 0 0; line-height:21px;}
-.pageFormContent .textInput { float:left;}
+.pageFormContent .textInput { float:left; width: 80px;}
 .pageFormContent select { float:left;}
 .pageFormContent .inputInfo { padding:0 5px; line-height:21px;}
 .pageFormContent span.unit, .pageFormContent a.unit { padding:0 5px; line-height:21px;}
@@ -514,7 +518,7 @@ body { overflow:hidden;}
 .pageFormContent dt { float:left; width:120px; padding:0 5px; line-height:21px;}
 .pageFormContent dd {display:block;line-height:21px;width:220px;float:left;}
 .pageFormContent dl.nowrap, .nowrap dl{width:100%; height:auto; clear: both;}
-.pageFormContent dl.nowrap dd, .nowrap dd {width: 560px;}
+.pageFormContent dl.nowrap dd, .nowrap dd {/*width: 560px;*/}
 
 fieldset {padding:3px; margin:0 0 5px 0; border:1px dotted #B8D0D6;}
 fieldset legend {padding:2px; border:1px dotted #B8D0D6; font-weight: bold;}
@@ -591,8 +595,8 @@ h2.subTitle { margin: 5px 10px; padding: 0; line-height: 30px; font-size: 14px; 
 #calendar .tm .hh li:hover, #calendar .tm .mm li:hover, #calendar .tm .ss li:hover{ background:#B3E4EB;}
 
 /* suggest */
-#suggest{position:absolute; z-index:2000; left:0; top:0;}
-#suggest ul{list-style:none; padding:1px; margin:0; background-color:#fff; border:1px solid #999; width:150px;}
+#suggest{position:absolute; z-index:2000; left:0; top:0; width:130px;}
+#suggest ul{list-style:none; padding:1px; margin:0; background-color:#fff; border:1px solid #999; width:128px;}
 #suggest li{display:block; color:#000; padding:3px; margin:0; border:1px solid #fff; background-color:transparent; text-align:left; cursor:default;}
 #suggest li.selected{border:1px solid #0a246a; background-color:#b6bdd2}
 
@@ -1953,3 +1957,11 @@ a.btnAttach{background-position: -183px 0}
 .upload-preview .thumbnail {margin: 0 3px;}
 .upload-preview .thumbnail .del-icon, .upload-wrap .del-icon { content:' '; display: block; position:absolute; top: 5px; right:5px; width:20px; height:20px; border-radius: 3px; opacity: 0.4; filter:alpha(opacity=40); background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgICA8cGF0aCBzdHlsZT0idGV4dC1pbmRlbnQ6MDt0ZXh0LWFsaWduOnN0YXJ0O2xpbmUtaGVpZ2h0Om5vcm1hbDt0ZXh0LXRyYW5zZm9ybTpub25lO2Jsb2NrLXByb2dyZXNzaW9uOnRiOy1pbmtzY2FwZS1mb250LXNwZWNpZmljYXRpb246Qml0c3RyZWFtIFZlcmEgU2FucyIgZD0iTSA3LjIxODc1IDUuNzgxMjUgTCA1Ljc4MTI1IDcuMjE4NzUgTCAxNC41NjI1IDE2IEwgNS43ODEyNSAyNC43ODEyNSBMIDcuMjE4NzUgMjYuMjE4NzUgTCAxNiAxNy40Mzc1IEwgMjQuNzgxMjUgMjYuMjE4NzUgTCAyNi4yMTg3NSAyNC43ODEyNSBMIDE3LjQzNzUgMTYgTCAyNi4yMTg3NSA3LjIxODc1IEwgMjQuNzgxMjUgNS43ODEyNSBMIDE2IDE0LjU2MjUgTCA3LjIxODc1IDUuNzgxMjUgeiIgY29sb3I9IiMwMDAiIG92ZXJmbG93PSJ2aXNpYmxlIiBmb250LWZhbWlseT0iQml0c3RyZWFtIFZlcmEgU2FucyI+PC9wYXRoPgo8L3N2Zz4=') center center no-repeat #fff;}
 .upload-preview .thumbnail .del-icon:hover, .upload-wrap .del-icon:hover {opacity: 0.7; filter:alpha(opacity=70);}
+
+
+/*start hou
+
+*/
+.table tr td{
+	text-align:center;
+}
