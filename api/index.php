@@ -133,6 +133,7 @@ switch ($api["action"]){
             $data["errmsg"]="请传入正确的参数";
         }
         break;
+        
 }
 echo json_encode($data);
 
