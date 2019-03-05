@@ -48,6 +48,7 @@ switch ($api["action"]){
             $data["succuss"]=false;
             $data["errmsg"]="无openid";
         }
+        
         break;
     case "updateuser":
         if(!empty($_POST["openid"])){

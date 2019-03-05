@@ -6,19 +6,18 @@
    <meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
    <link href="css/mui.min.css" rel="stylesheet" />
-<title>优客通-飞牛巴士</title>
+<title>优客旅游微信登录</title>
 <script src="js/mui.min.js"></script>
 		
 </head>
 <body >
 <?php
-session_start();
+require "../hzb/config.php";
+require_once R.'hzb/inc/load.php';
 $code=$_GET['code'];
-//	header("Location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7a5e0d8bf5cda8ee&redirect_uri=http%3A%2F%2Fwx.uktong.cn%2Ffeiniu%2Flogin.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
-
-
-$appid = 'wx7a5e0d8bf5cda8ee';  
-$secret = '45a89d49b0e879dfb0dc8971b9b82180';  
+$vchat=$db->select("uk_vchatconfig","*","1=1")[0];
+$appid = $vchat["appid"];  
+$secret = $vchat["secret"];  
   
   
 $url = "https://api.weixin.qq.com/sns/oauth2/access_token?grant_type=authorization_code&appid=".$appid."&secret=".$secret."&code=".$code.""; 
@@ -49,8 +48,16 @@ if (isset($mresArr->errcode)) {
 
 //$mresArr=json_encode($mresArr);
 //5.关闭curl
-var_dump($mresArr);
 
+$usermsg=object_to_array($mresArr);
+$login=json_decode(send_post($api."login", $usermsg),true);
+
+if($login["succuss"]){
+	//$url->to('wx/index.html');
+	 header("location:index.php");
+}else{
+die("<script>mui.alert('".$login["errmsg"]."');</script>");
+}
 ?>
 </body>
 </html>
